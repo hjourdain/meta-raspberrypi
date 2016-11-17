@@ -1,8 +1,8 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-${PV}:"
 
-LINUX_VERSION ?= "4.7.7"
+LINUX_VERSION ?= "4.7.10"
 
-SRCREV = "a45a35c08598b23f9fd82e49c83b46c7d536244f"
+SRCREV = "e7fa325a40f260ed9fb86391a0b65150eba8c112"
 SRC_URI = "git://github.com/raspberrypi/linux.git;protocol=git;branch=rpi-4.7.y \
            file://0001-fix-dtbo-rules.patch \
 "
