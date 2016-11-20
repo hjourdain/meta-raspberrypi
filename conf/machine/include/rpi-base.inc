@@ -40,6 +40,27 @@ KERNEL_DEVICETREE ?= " \
     overlays/pi3-miniuart-bt.dtbo \
     overlays/vc4-kms-v3d.dtbo \
     "
+KERNEL_DEVICETREE_raspberrypi3-64 ?= " \
+    broadcom/bcm2837-rpi-3-b.dtb \
+    \
+    broadcom/overlays/hifiberry-amp.dtbo \
+    broadcom/overlays/hifiberry-dac.dtbo \
+    broadcom/overlays/hifiberry-dacplus.dtbo \
+    broadcom/overlays/hifiberry-digi.dtbo \
+    broadcom/overlays/i2c-rtc.dtbo \
+    broadcom/overlays/iqaudio-dac.dtbo \
+    broadcom/overlays/iqaudio-dacplus.dtbo \
+    broadcom/overlays/lirc-rpi.dtbo \
+    broadcom/overlays/pitft22.dtbo \
+    broadcom/overlays/pitft28-resistive.dtbo \
+    broadcom/overlays/pps-gpio.dtbo \
+    broadcom/overlays/rpi-ft5406.dtbo \
+    broadcom/overlays/w1-gpio.dtbo \
+    broadcom/overlays/w1-gpio-pullup.dtbo \
+    broadcom/overlays/pi3-disable-bt.dtbo \
+    broadcom/overlays/pi3-miniuart-bt.dtbo \
+    broadcom/overlays/vc4-kms-v3d.dtbo \
+    "
 KERNEL_IMAGETYPE ?= "Image"
 
 MACHINE_FEATURES += "apm usbhost keyboard vfat ext2 screen touchscreen alsa bluetooth wifi sdio"

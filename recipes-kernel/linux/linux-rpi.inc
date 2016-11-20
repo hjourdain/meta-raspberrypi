@@ -39,12 +39,15 @@ do_configure_prepend() {
     echo "" > ${B}/.config
     CONF_SED_SCRIPT=""
 
-    # oabi / eabi support
-    kernel_configure_variable AEABI y
-    if [ "${ARM_KEEP_OABI}" = "1" ] ; then
-        kernel_configure_variable OABI_COMPAT y
-    else
-        kernel_configure_variable OABI_COMPAT n
+    if [ "${ARCH}" = "arm" ]; then
+
+        # oabi / eabi support
+        kernel_configure_variable AEABI y
+        if [ "${ARM_KEEP_OABI}" = "1" ] ; then
+            kernel_configure_variable OABI_COMPAT y
+        else
+            kernel_configure_variable OABI_COMPAT n
+        fi
     fi
 
     # Set cmdline
@@ -58,7 +61,11 @@ do_configure_prepend() {
     # Newer versions of udev mandate that sysfs doesn't have deprecated entries
     if [ "${UDEV_GE_141}" = "1" ] ; then
         kernel_configure_variable SYSFS_DEPRECATED n
-        kernel_configure_variable SYSFS_DEPRECATED_V2 n
+
+        if [ "${ARCH}" = "arm" ]; then
+            kernel_configure_variable SYSFS_DEPRECATED_V2 n
+        fi
+
         kernel_configure_variable HOTPLUG y
         kernel_configure_variable UEVENT_HELPER_PATH "\"\""
         kernel_configure_variable UNIX y
@@ -77,13 +84,20 @@ do_configure_prepend() {
     if [ "${KERNEL_ENABLE_CGROUPS}" = "1" ] ; then
         kernel_configure_variable CGROUP_SCHED y
         kernel_configure_variable CGROUPS y
-        kernel_configure_variable CGROUP_NS y
+
+        if [ "${ARCH}" = "arm" ]; then
+            kernel_configure_variable CGROUP_NS y
+        fi
+
         kernel_configure_variable CGROUP_FREEZER y
         kernel_configure_variable CGROUP_DEVICE y
         kernel_configure_variable CPUSETS y
         kernel_configure_variable PROC_PID_CPUSET y
         kernel_configure_variable CGROUP_CPUACCT y
-        kernel_configure_variable RESOURCE_COUNTERS y
+
+        if [ "${ARCH}" = "arm" ]; then
+            kernel_configure_variable RESOURCE_COUNTERS y
+        fi
     fi
 
     # root-over-nfs-over-usb-eth support. Limited, but should cover some cases
@@ -93,7 +107,11 @@ do_configure_prepend() {
         kernel_configure_variable INET y
         kernel_configure_variable IP_PNP y
         kernel_configure_variable USB_GADGET y
-        kernel_configure_variable USB_GADGET_SELECTED y
+
+        if [ "${ARCH}" = "arm" ]; then
+            kernel_configure_variable USB_GADGET_SELECTED y
+        fi
+
         kernel_configure_variable USB_ETH y
         kernel_configure_variable NFS_FS y
         kernel_configure_variable ROOT_NFS y
