@@ -1,7 +1,7 @@
-From 13c8784da3dbd977f64cec740eba775b6fab11c2 Mon Sep 17 00:00:00 2001
+From 13c8784da3dbd977f64cec740eba775b6fab11c2 Sat Nov 19 00:00:00 2001
 From: Herve Jourdain <herve.jourdain@neuf.fr>
-Date: Fri, 20 May 2016 16:02:23 +0800
-Subject: [yocto][meta-raspberrypi][PATCH v4 4/5] linux-raspberrypi_4.4.inc:
+Date: Sat, 19 Nov 2016 16:02:23 +0800
+Subject: [yocto][meta-raspberrypi][PATCH] linux-raspberrypi_4.7.inc:
  support for .dtbo files for dtb overlays
 
 Upstream-Status: Pending
@@ -25,6 +25,19 @@ index a2e7cf7..673c1cb 100644
  	$(Q)$(MAKE) $(build)=$(boot)/dts MACHINE=$(MACHINE) $(boot)/dts/$@
 +%.dtbo: | scripts
 +	$(Q)$(MAKE) $(build)=$(boot)/dts MACHINE=$(MACHINE) $(boot)/dts/$@
+ 
+ PHONY += dtbs dtbs_install
+ 
+diff --git a/arch/arm64/Makefile b/arch/arm64/Makefile
+index 648a32c..68b8147 100644
+--- a/arch/arm64/Makefile
++++ b/arch/arm64/Makefile
+@@ -103,6 +103,8 @@ zinstall install:
+ 
+ %.dtb: scripts
+ 	$(Q)$(MAKE) $(build)=$(boot)/dts $(boot)/dts/$@
++%.dtbo: scripts
++	$(Q)$(MAKE) $(build)=$(boot)/dts $(boot)/dts/$@
  
  PHONY += dtbs dtbs_install
  
