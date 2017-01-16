@@ -16,7 +16,7 @@ COMPATIBLE_MACHINE = "raspberrypi"
 
 SRCBRANCH = "master"
 SRCFORK = "raspberrypi"
-SRCREV = "100f8bb3e74e29d04fb99857183cc34aaa712e3f"
+SRCREV = "bb15afe33b313fe045d52277a78653d288e04f67"
 
 SRC_URI = "\
     git://github.com/${SRCFORK}/userland.git;protocol=git;branch=${SRCBRANCH} \
@@ -29,10 +29,9 @@ SRC_URI = "\
     file://0007-initialize-front-back-wayland-buffers.patch \
     file://0008-Remove-RPC_FLUSH.patch \
     file://0009-fix-cmake-dependency-race.patch \
-    file://0010-Fix-enum-conversion-warnings.patch \
-    file://0011-Fix-for-framerate-with-nested-composition.patch \
-    file://0012-build-shared-library-for-vchostif.patch \
-    file://0013-implement-buffer-wrapping-interface-for-dispmanx.patch \
+    file://0010-Fix-for-framerate-with-nested-composition.patch \
+    file://0011-build-shared-library-for-vchostif.patch \
+    file://0012-implement-buffer-wrapping-interface-for-dispmanx.patch \
 "
 S = "${WORKDIR}/git"
 
@@ -43,6 +42,9 @@ ASNEEDED = ""
 EXTRA_OECMAKE = "-DCMAKE_BUILD_TYPE=Release -DCMAKE_EXE_LINKER_FLAGS='-Wl,--no-as-needed' \
                  -DVMCS_INSTALL_PREFIX=${exec_prefix} \
 "
+
+EXTRA_OECMAKE_append_aarch64 = " -DARM64=ON "
+
 
 PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', '', d)}"
 
